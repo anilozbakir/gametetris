@@ -22,6 +22,7 @@ import 'package:flutter/services.dart';
 
 class GameBoard extends PositionComponent {
   int row, col;
+  int _typeIndex = 0;
   Vector2? gameposition;
   GameBoard({required this.row, required this.col}) : super();
   List<Tile>? screenMap;
@@ -58,25 +59,53 @@ class GameBoard extends PositionComponent {
 
   void RotateAndMovePiece(LogicalKeyboardKey key) {
     if (key == LogicalKeyboardKey.arrowUp) {
-      var mapPiece = PieceMaps.maps[piece!.type];
-      for (int i = 0; i < 16; i++) {
-        int posx = piece!.position!.x.toInt() + i % 4;
-        int posy = piece!.position!.y.toInt() + i ~/ 4;
-        int sc_index = posx.toInt() + posy.toInt() * col;
-        screenMap![sc_index].color = PieceColors.COLOR_BLACK;
-        screenMap![sc_index].getNewColor();
-      }
+      //   var mapPiece = PieceMaps.maps[piece!.type];
+      clearTiles();
       piece!.rotation++;
       piece!.rotation %= 4;
-      mapPiece = PieceMaps.maps[piece!.type];
-      for (int i = 0; i < 16; i++) {
-        int posx = piece!.position!.x.toInt() + i % 4;
-        int posy = piece!.position!.y.toInt() + i ~/ 4;
-        int sc_index = posx.toInt() + posy.toInt() * col;
-        screenMap![sc_index].color = mapPiece![piece!.rotation][i];
-        screenMap![sc_index].getNewColor();
-        ;
+      placeTile();
+    } else if (key == LogicalKeyboardKey.arrowLeft) {
+      clearTiles();
+      piece!.rotation = 0;
+      _typeIndex++;
+      _typeIndex %= 4;
+      piece!.type = PieceType.values[_typeIndex];
+
+      placeTile();
+    } else if (key == LogicalKeyboardKey.arrowRight) {
+      clearTiles();
+      piece!.rotation = 0;
+      if (_typeIndex > 0) {
+        _typeIndex--;
+      } else {
+        _typeIndex = 3;
       }
+
+      _typeIndex %= 4;
+      piece!.type = PieceType.values[_typeIndex];
+      placeTile();
+    }
+  }
+
+  clearTiles() {
+    for (int i = 0; i < 16; i++) {
+      int posx = piece!.position!.x.toInt() + i % 4;
+      int posy = piece!.position!.y.toInt() + i ~/ 4;
+      int sc_index = posx.toInt() + posy.toInt() * col;
+      screenMap![sc_index].color = PieceColors.COLOR_BLACK;
+      screenMap![sc_index].getNewColor();
+    }
+  }
+
+  placeTile() {
+    var mapPiece = PieceMaps.maps[piece!.type];
+    for (int i = 0; i < 16; i++) {
+      int posx = piece!.position!.x.toInt() + i % 4;
+      int posy = piece!.position!.y.toInt() + i ~/ 4;
+      int sc_index = posx.toInt() + posy.toInt() * col;
+      screenMap![sc_index].color = mapPiece![piece!.rotation][i];
+      screenMap![sc_index].getNewColor();
+      ;
     }
   }
 

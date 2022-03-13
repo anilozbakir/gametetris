@@ -184,12 +184,39 @@ class PieceMaps {
         //row1
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLUE,
         PieceColors.COLOR_BLACK,
         //row 2
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLUE,
         PieceColors.COLOR_BLACK,
+        //row 3
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLUE,
+        PieceColors.COLOR_BLUE,
+        PieceColors.COLOR_BLACK,
+        //row 4
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+      ],
+    ],
+    // l_Block_Map
+    PieceType.O_BLOCK: [
+      //map all the rotations of i_block
+      // 0 degrees
+      [
+        //row1
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_BLACK,
+        //row 2
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
         PieceColors.COLOR_BLACK,
         //row 3
         PieceColors.COLOR_BLACK,
@@ -197,10 +224,78 @@ class PieceMaps {
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
         //row 4
-        PieceColors.COLOR_LIGHT_BLUE,
-        PieceColors.COLOR_LIGHT_BLUE,
-        PieceColors.COLOR_LIGHT_BLUE,
-        PieceColors.COLOR_LIGHT_BLUE
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+      ],
+      // 90 degrees
+      [
+        //row1
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_BLACK,
+        //row 2
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_BLACK,
+        //row 3
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        //row 4
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+      ],
+      //180 degrees
+      [
+        //row1
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_BLACK,
+        //row 2
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_BLACK,
+        //row 3
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        //row 4
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+      ],
+      [
+        //row1
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_BLACK,
+        //row 2
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_YELLOW,
+        PieceColors.COLOR_BLACK,
+        //row 3
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        //row 4
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
       ],
     ],
     PieceType.L_BLOCK: [
@@ -215,12 +310,12 @@ class PieceMaps {
         //row 2
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         //row 3
-        PieceColors.COLOR_BLUE,
-        PieceColors.COLOR_BLUE,
-        PieceColors.COLOR_BLUE,
+        PieceColors.COLOR_ORANGE,
+        PieceColors.COLOR_ORANGE,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         //row 4
         PieceColors.COLOR_BLACK,
@@ -232,18 +327,18 @@ class PieceMaps {
       [
         //row1
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLUE,
-        PieceColors.COLOR_BLUE,
+        PieceColors.COLOR_ORANGE,
+        PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
         //row 2
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLUE,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
         //row 3
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLUE,
-        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_ORANGE,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         //row 4
         PieceColors.COLOR_BLACK,
@@ -259,48 +354,46 @@ class PieceMaps {
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
         //row 2
-        PieceColors.COLOR_BLUE,
-        PieceColors.COLOR_BLUE,
-        PieceColors.COLOR_BLUE,
+        PieceColors.COLOR_ORANGE,
+        PieceColors.COLOR_ORANGE,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         //row 3
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLUE,
         PieceColors.COLOR_BLACK,
         //row 4
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK
       ],
       // 270 degrees
       [
         //row1
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
         //row 2
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         PieceColors.COLOR_BLACK,
         //row 3
         PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLACK,
-        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_ORANGE,
+        PieceColors.COLOR_ORANGE,
         PieceColors.COLOR_BLACK,
         //row 4
-        PieceColors.COLOR_LIGHT_BLUE,
-        PieceColors.COLOR_LIGHT_BLUE,
-        PieceColors.COLOR_LIGHT_BLUE,
-        PieceColors.COLOR_LIGHT_BLUE
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK,
+        PieceColors.COLOR_BLACK
       ],
     ]
   };
-
-  // l_Block_Map
 
   // o_Block_Map
 

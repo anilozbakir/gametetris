@@ -37,10 +37,8 @@ class MyGame extends FlameGame with KeyboardEvents {
     final isKeyDown = event is RawKeyDownEvent;
 
     if (isKeyDown) {
-      if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
-        gameBoard!.RotateAndMovePiece(LogicalKeyboardKey.arrowUp);
-        return KeyEventResult.handled;
-      }
+      gameBoard!.RotateAndMovePiece(keysPressed.first);
+      return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
   }
