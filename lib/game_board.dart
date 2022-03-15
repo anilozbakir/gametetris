@@ -19,6 +19,7 @@ import "package:flame/input.dart";
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import "dart:math";
 
 class GameBoard extends PositionComponent {
   int row, col;
@@ -54,18 +55,28 @@ class GameBoard extends PositionComponent {
       screenMap![i] = tl;
       add(tl);
     }
-    piece = Piece(type: PieceType.J_BLOCK);
+    newPiece();
   }
 
+  void newPiece() {
+    var randomx = Random();
+    var pieceTypeIndex = randomx.nextInt(100);
+    pieceTypeIndex %= 4;
+    //pieceType %= PieceType.values.length;
+    piece = Piece(type: PieceType.values[pieceTypeIndex]);
+  }
+
+//for test proposes the piece is rotated without movement ,
+//works for four pieces
   void RotateAndMovePiece(LogicalKeyboardKey key) {
     if (key == LogicalKeyboardKey.arrowUp) {
       //   var mapPiece = PieceMaps.maps[piece!.type];
-      clearTiles();
+      clearTiles(true);
       piece!.rotation++;
       piece!.rotation %= 4;
       placeTile();
     } else if (key == LogicalKeyboardKey.arrowLeft) {
-      clearTiles();
+      clearTiles(true);
       piece!.rotation = 0;
       _typeIndex++;
       _typeIndex %= 4;
@@ -73,41 +84,113 @@ class GameBoard extends PositionComponent {
 
       placeTile();
     } else if (key == LogicalKeyboardKey.arrowRight) {
-      clearTiles();
+      clearTiles(true);
       piece!.rotation = 0;
-      if (_typeIndex > 0) {
-        _typeIndex--;
-      } else {
-        _typeIndex = 3;
-      }
-
+      // if (_typeIndex > 0) {
+      //   _typeIndex--;
+      // } else {
+      //   _typeIndex = 3;
+      // }
+      _typeIndex--;
       _typeIndex %= 4;
       piece!.type = PieceType.values[_typeIndex];
       placeTile();
     }
   }
 
-  clearTiles() {
+  clearTiles(bool setNewColor) {
+    var mapPiece = PieceMaps.maps[piece!.type];
+    int posx, posy, scindex;
     for (int i = 0; i < 16; i++) {
-      int posx = piece!.position!.x.toInt() + i % 4;
-      int posy = piece!.position!.y.toInt() + i ~/ 4;
-      int sc_index = posx.toInt() + posy.toInt() * col;
-      screenMap![sc_index].color = PieceColors.COLOR_BLACK;
-      screenMap![sc_index].getNewColor();
+      posx = piece!.position!.x.toInt() + i % 4;
+      posy = piece!.position!.y.toInt() + i ~/ 4;
+      scindex = posx.toInt() + posy.toInt() * col;
+      if (mapPiece![piece!.rotation][i] != PieceColors.COLOR_BLACK) {
+        //clear the tile if it has a color value.
+        screenMap![scindex].color = PieceColors.COLOR_BLACK;
+        if (setNewColor) screenMap![scindex].getNewColor();
+      }
     }
   }
 
   placeTile() {
+    int posx, posy, scindex;
     var mapPiece = PieceMaps.maps[piece!.type];
     for (int i = 0; i < 16; i++) {
-      int posx = piece!.position!.x.toInt() + i % 4;
-      int posy = piece!.position!.y.toInt() + i ~/ 4;
-      int sc_index = posx.toInt() + posy.toInt() * col;
-      screenMap![sc_index].color = mapPiece![piece!.rotation][i];
-      screenMap![sc_index].getNewColor();
-      ;
+      posx = piece!.position!.x.toInt() + i % 4;
+      posy = piece!.position!.y.toInt() + i ~/ 4;
+      scindex = posx.toInt() + posy.toInt() * col;
+      if (mapPiece![piece!.rotation][i] != PieceColors.COLOR_BLACK) {
+        //clear the tile if it has a color value.
+        screenMap![scindex].color = mapPiece[piece!.rotation][i];
+        screenMap![scindex].getNewColor();
+      }
+      // screenMap![sc_index].color = mapPiece![piece!.rotation][i];
+      // screenMap![sc_index].getNewColor();
     }
   }
+
+  bool checkNewMove(LogicalKeyboardKey key, int newRotation) {
+    int posx, posy, scindex;
+    Vector2 newPosition;
+    ;
+    int rotation = piece!.rotation;
+    newPosition = Vector2(0, 0);
+    //  checkVector = Vector2(1, 0);
+    var mapPiece = PieceMaps.maps[piece!.type];
+    if (key == LogicalKeyboardKey.arrowDown) {
+      newPosition = Vector2(0, 1);
+      //  checkVector = Vector2(1, 0);
+    } else if (key == LogicalKeyboardKey.arrowLeft) {
+      newPosition = Vector2(-1, 0);
+      // checkVector = Vector2(0, 1);
+    } else if (key == LogicalKeyboardKey.arrowRight) {
+      newPosition = Vector2(1, 0);
+      // checkVector = Vector2(0, 1);
+    } else if (key == LogicalKeyboardKey.arrowUp) {
+      newRotation = rotation++;
+      newRotation %= 4;
+      // checkVector = Vector2(1, 1);
+    }
+    clearTiles(
+        false); //clear the old tiles from screen memory(not screen itself)
+    for (int i = 0; i < 16; i++) {
+      posx = piece!.position!.x.toInt() + newPosition.x.toInt() + i % 4;
+
+      posy = piece!.position!.y.toInt() + newPosition.y.toInt() + i ~/ 4;
+      scindex = posx.toInt() + posy.toInt() * col;
+
+      // if ((posx < 0 || posx > col || posy >= row || (scindex < 0)) ||
+      //     (screenMap![scindex].color != PieceColors.COLOR_BLACK &&
+      //         mapPiece![newRotation][i] != PieceColors.COLOR_BLACK)) {
+      if (mapPiece![newRotation][i] != PieceColors.COLOR_BLACK &&
+          (((posx == -1) && key == LogicalKeyboardKey.arrowLeft) ||
+              ((posx == (col)) && key == LogicalKeyboardKey.arrowRight) ||
+              ((posy == (row)) && key == LogicalKeyboardKey.arrowDown) ||
+              screenMap![scindex].color != PieceColors.COLOR_BLACK)) {
+        dv.log(("collusion $posx $posy "));
+        if (scindex < 0) {
+          dv.log("index fault");
+        }
+        placeTile(); //place old tile back
+        return false;
+      }
+    }
+    //no collusion place it to its new location
+    clearTiles(true); //clear the old tiles from screen
+    piece!.position = newPosition + piece!.position!;
+    rotation = newRotation;
+
+    placeTile();
+    return true;
+  }
+
+  // checkMoveAndPlace(LogicalKeyboardKey key) {
+  //   bool process = false;
+  //   if (key == LogicalKeyboardKey.arrowDown) {
+  //   } else if (key == LogicalKeyboardKey.arrowLeft) {
+  //   } else if (key == LogicalKeyboardKey.arrowDown) {}
+  // }
 
   @override
   void render(Canvas c) {

@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:flame/components.dart';
 import 'dart:ui' as d;
 import "piece.dart";
@@ -5,11 +7,17 @@ import "piece.dart";
 class Tile extends SpriteComponent {
   static Sprite? mainPicture;
   static Vector? imageDimensions;
+  static Map<PieceColors, int>? colorToInt;
   static loadMainImage() async {
     //for performance load the main picture once.
     //then cut and move the frame window for what color you want.
     mainPicture =
         await Sprite.load("pieces_Inkspace.png", srcSize: Vector2.all(32));
+    colorToInt = {};
+    int index = 0;
+    PieceColors.values.forEach((element) {
+      colorToInt![element] = index++;
+    });
   }
 
   PieceColors color;
@@ -36,13 +44,9 @@ class Tile extends SpriteComponent {
     // sprite!.srcPosition = Vector2(32, 32);
     getNewColor();
   }
+
   void getNewColor() {
-    int i;
-    for (i = 0; i < PieceColors.values.length; i++) {
-      if (PieceColors.values[i] == color) {
-        break;
-      }
-    }
+    int i = colorToInt![color] ?? 0;
     int row, col;
     row = i ~/ 4;
     col = i % 4;
