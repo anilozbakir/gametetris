@@ -38,7 +38,7 @@ class MyGame extends FlameGame with KeyboardEvents {
 
     if (isKeyDown) {
       // gameBoard!.RotateAndMovePiece(keysPressed.first);
-      bool result = gameBoard!.checkNewMove(keysPressed.first, 0);
+      bool result = gameBoard!.checkNewMove(keysPressed.first);
       if (!result && keysPressed.first == LogicalKeyboardKey.arrowDown) {
         //the piece moved down and there is a collution
         //make a new piece

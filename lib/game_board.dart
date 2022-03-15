@@ -130,11 +130,11 @@ class GameBoard extends PositionComponent {
     }
   }
 
-  bool checkNewMove(LogicalKeyboardKey key, int newRotation) {
+  bool checkNewMove(LogicalKeyboardKey key) {
     int posx, posy, scindex;
     Vector2 newPosition;
-    ;
-    int rotation = piece!.rotation;
+
+    int newRotation = piece!.rotation;
     newPosition = Vector2(0, 0);
     //  checkVector = Vector2(1, 0);
     var mapPiece = PieceMaps.maps[piece!.type];
@@ -148,9 +148,10 @@ class GameBoard extends PositionComponent {
       newPosition = Vector2(1, 0);
       // checkVector = Vector2(0, 1);
     } else if (key == LogicalKeyboardKey.arrowUp) {
-      newRotation = rotation++;
+      newRotation++;
       newRotation %= 4;
       // checkVector = Vector2(1, 1);
+      dv.log("new rotation $newRotation");
     }
     clearTiles(
         false); //clear the old tiles from screen memory(not screen itself)
@@ -179,8 +180,9 @@ class GameBoard extends PositionComponent {
     //no collusion place it to its new location
     clearTiles(true); //clear the old tiles from screen
     piece!.position = newPosition + piece!.position!;
-    rotation = newRotation;
-
+    piece!.rotation = newRotation;
+    dv.log("rotation placed $piece!.rotation");
+    dv.log("placing new");
     placeTile();
     return true;
   }
