@@ -38,13 +38,26 @@ class MyGame extends FlameGame with KeyboardEvents {
 
     if (isKeyDown) {
       // gameBoard!.RotateAndMovePiece(keysPressed.first);
+
+      // if (keysPressed.first == LogicalKeyboardKey.space) {
+      //   while (gameBoard!.checkNewMove(keysPressed.first));
+      //   int c = gameBoard!.collusionIndex ~/ gameBoard!.col;
+      //   dv.log("$c");
+      //   gameBoard!.blowLines(c);
+
+      //   gameBoard!.newPiece();
+      //   return KeyEventResult.handled;
+      // }
       bool result = gameBoard!.checkNewMove(keysPressed.first);
       if (!result && keysPressed.first == LogicalKeyboardKey.arrowDown) {
-        //the piece moved down and there is a collution
+        //the piece moved down and there is a collusion
         //make a new piece
         int gx = gameBoard!.piece!.position!.x.toInt();
         int gy = gameBoard!.piece!.position!.y.toInt();
-        dv.log("$gx $gy");
+        int c = gameBoard!.collusionIndex ~/ gameBoard!.col;
+        dv.log("$c");
+        gameBoard!.blowLines(c);
+
         gameBoard!.newPiece();
       }
       return KeyEventResult.handled;
