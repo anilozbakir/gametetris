@@ -1,7 +1,12 @@
 # gametetris
 
-classic game tetris
+classic game tetris writen in flutter
 
-## Getting Started
+ 
+## know issues
 
-this is a part of a game bundle project to be placed on google play
+- no scoring
+- no auto movement 
+- problem with next piece
+
+will handle them when i have the time... sorry
